@@ -17,12 +17,25 @@ const NewPrompt = ({ data }) => {
     });
 
     const chat = model.startChat({
-        history: [
-            data?.history.map(({ role, parts }) => ({
-                role,
-                parts: [{ text: parts[0].text }],
-            })),
+        history:[
+            {
+                role:"user",
+                parts:[{text:"user text"}]
+            },{
+                role:"model",
+                parts:[{text:"model text"}]
+            }
         ],
+        // history: [
+        //     data?.history.map(({ role, parts }) => {
+        //         console.log("role is")
+        //         console.log(role)
+        //         return {
+        //             role,
+        //             parts: [{ text: parts[0].text }],
+        //         };
+        //     }),
+        // ],
         generationConfig: {
             //maxOutputTokens:100,
         },
