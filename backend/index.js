@@ -5,14 +5,13 @@ import mongoose from "mongoose";
 import UserChats from "./models/userChats.js";
 import Chat from "./models/chat.js";
 import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
-import path from 'path';
-import url, { fileURLToPath } from 'url';
-
+import path from "path";
+import url, { fileURLToPath } from "url";
 
 const port = process.env.PORT || 3000;
 const app = express();
 
-const __filename = fileURLToPath(import.meta.url)
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(
@@ -175,11 +174,11 @@ app.use((err, req, res, next) => {
     res.status(401).send("Unauthenticated!");
 });
 
-app.use(express.static(path.join(__dirname, "../react-client")))
+app.use(express.static(path.join(__dirname, "../react-client/dist")));
 
-// app.get("*",(req, res) => {
-//     res.sendFile(path.join(__dirname, "../react-client","index.html"))
-// })
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../react-client/dist", "index.html"));
+});
 
 app.listen(port, () => {
     connect();
